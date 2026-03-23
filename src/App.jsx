@@ -1,6 +1,7 @@
 import React from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
+import About from './components/About'; // New Import
 import './App.css';
 
 function App() {
@@ -16,6 +17,9 @@ function App() {
       {/* Components */}
       <Navbar />
       <Hero />
+      
+      {/* The new About section is added here */}
+      <About />
     </div>
   );
 }

@@ -1,0 +1,185 @@
+.about-section {
+    background-color: var(--bg-black);
+    color: var(--text-light);
+    padding: 8rem 2rem;
+    width: 100vw;
+    position: relative;
+    z-index: 20; 
+  }
+  
+  .about-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 5rem;
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
+  }
+  
+  /* --- Image Column --- */
+  .about-image-column {
+    flex: 0 1 35%; 
+    min-width: 300px; 
+    display: flex;
+    justify-content: center;
+  }
+  
+  .about-image-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .image-bg-box {
+    position: absolute;
+    width: 90%;
+    height: 90%;
+    background-color: var(--brand-light-blue);
+    border-radius: 12px;
+    top: 5%;
+    left: 5%;
+    z-index: 0;
+  }
+  
+  .about-me-img {
+    width: 100%;
+    position: relative;
+    z-index: 1;
+    border-radius: 12px;
+    object-fit: cover;
+  }
+  
+  /* --- Text Column --- */
+  .about-text-column {
+    flex: 1 1 65%;
+    min-width: 350px; 
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .about-heading {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 5vw, 5rem);
+    color: var(--text-light);
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    line-height: 1;
+  }
+  
+  .about-description {
+    font-family: var(--font-main);
+    font-size: 1.05rem;
+    font-weight: 400;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+    color: rgba(229, 225, 216, 0.85);
+  }
+  
+  /* --- Horizontal Timeline Section --- */
+  .timeline-container {
+    margin-top: 4rem;
+    display: flex;
+    flex-direction: row; /* Horizontal layout */
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 2rem;
+    position: relative;
+  }
+  
+  /* Horizontal Connecting Line */
+  .timeline-container::after {
+    content: '';
+    position: absolute;
+    height: 2px;
+    background-color: var(--brand-light-blue);
+    top: 30px; /* Exactly halfway down the 60px icons */
+    left: 15%; /* Starts inside the first item */
+    right: 15%; /* Ends inside the last item */
+    z-index: 0; 
+  }
+  
+  .timeline-item {
+    display: flex;
+    flex-direction: column; /* Stack icon on top of text */
+    align-items: center;
+    flex: 1; /* Distribute horizontal space equally */
+    position: relative;
+    z-index: 10; 
+    text-align: center; /* Center the text */
+  }
+  
+  .icon-circle {
+    flex: 0 0 60px;
+    width: 60px; /* Ensure width is set for centering */
+    height: 60px;
+    border: 2px solid var(--brand-light-blue);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--bg-black); 
+    z-index: 2; 
+    margin-bottom: 1.5rem; /* Space before text begins */
+  }
+  
+  .timeline-icon {
+    color: var(--brand-light-blue);
+    stroke-width: 2px;
+  }
+  
+  .timeline-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .timeline-title {
+    font-family: var(--font-main);
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--text-light);
+  }
+  
+  .timeline-detail {
+    font-family: var(--font-main);
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: rgba(229, 225, 216, 0.7);
+    line-height: 1.4;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 1024px) {
+    .about-container {
+      flex-direction: column;
+      align-items: center;
+    }
+    .about-image-column {
+      width: 100%;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    /* On mobile, stack the timeline vertically so it doesn't squish */
+    .timeline-container {
+      flex-direction: column;
+      align-items: center;
+      gap: 3rem;
+    }
+    .timeline-container::after {
+      /* Switch back to vertical line for mobile */
+      width: 2px;
+      height: auto;
+      top: 30px;
+      bottom: 30px;
+      left: 50%;
+      right: auto;
+      transform: translateX(-50%);
+    }
+  }

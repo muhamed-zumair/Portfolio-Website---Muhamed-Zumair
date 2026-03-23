@@ -1,140 +1,140 @@
 .hero-section {
-    position: relative;
-    min-height: 100vh;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  /* --- TYPOGRAPHY LAYER --- */
-  .hero-text-container {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* --- TYPOGRAPHY LAYER --- */
+.hero-text-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  max-width: 1500px;
+  z-index: 10; /* Sits above the background, below the model */
+  padding: 0 2rem;
+}
+
+.text-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.greeting {
+  color: var(--text-light);
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  font-weight: 300;
+  align-self: flex-start;
+  margin-left: 8%;
+  margin-bottom: -1rem;
+}
+
+.name-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 0.9;
+  width: 100%;
+}
+
+.name-solid {
+  font-family: var(--font-display);
+  font-size: 12vw;
+  color: var(--text-light);
+  text-transform: uppercase;
+  letter-spacing: -2px;
+  text-shadow: 0px 15px 25px rgba(0, 0, 0, 0.6);
+}
+
+/* --- DESIGNER LABEL LAYER (3D Cube Animation) --- */
+.designer-label-container {
+  position: absolute;
+  bottom: 12vh; /* Precise vertical placement, far lower, near the CV button's plane */
+  right: 8%;    /* Horizontal alignment with the text layout grid */
+  z-index: 10;  /* Below the model, above the background, same as text */
+  font-size: clamp(2rem, 4vw, 4rem); 
+  height: 1em; 
+  width: 8em;   /* Gives the cube a defined width to rotate within */
+  perspective: 1000px; /* Gives the 3D depth effect */
+}
+
+.cube {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  /* 12s total duration for 4 faces = 3 seconds per face */
+  animation: cubeRotate 12s infinite cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.cube-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; /* Keeps the text aligned perfectly to the right */
+  font-family: var(--font-display);
+  color: var(--text-light);
+  text-transform: uppercase;
+  letter-spacing: -2px;
+  line-height: 1;
+  backface-visibility: hidden; /* Hides the text when it faces backward */
+}
+
+/* Positioning the 4 faces of the cube */
+.face-front  { transform: rotateX(0deg) translateZ(0.5em); }
+.face-top    { transform: rotateX(90deg) translateZ(0.5em); }
+.face-back   { transform: rotateX(180deg) translateZ(0.5em); }
+.face-bottom { transform: rotateX(-90deg) translateZ(0.5em); }
+
+/* The Keyframe Animation */
+@keyframes cubeRotate {
+  0%, 15% { transform: rotateX(0deg); }
+  25%, 40% { transform: rotateX(90deg); }
+  50%, 65% { transform: rotateX(180deg); }
+  75%, 90% { transform: rotateX(270deg); }
+  100% { transform: rotateX(360deg); }
+}
+
+/* --- 3D MODEL LAYER --- */
+.model-container {
+  position: absolute;
+  bottom: -5%; /* Pulls the image slightly down to crop the bottom if needed */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20; /* Sits ON TOP of the text */
+  height: 85vh; /* Adjust this so the model fits perfectly on your screen */
+  display: flex;
+  justify-content: center;
+  pointer-events: none; /* Prevents the image from blocking clicks on elements behind it */
+}
+
+.model-img {
+  height: 100%;
+  width: auto;
+  object-fit: contain;
+  /* Optional drop shadow to separate model from text */
+  filter: drop-shadow(0px 20px 30px rgba(0, 0, 0, 0.5)); 
+}
+
+/* --- BUTTON LAYER (UPDATED to match image) --- */
+.download-btn {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 100%;
-    max-width: 1500px;
-    z-index: 10; /* Sits above the background, below the model */
-    padding: 0 2rem;
-  }
-  
-  .text-wrapper {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .greeting {
-    color: var(--text-light);
-    font-size: clamp(2.5rem, 4vw, 3.5rem);
-    font-weight: 300;
-    align-self: flex-start;
-    margin-left: 8%;
-    margin-bottom: -1rem;
-  }
-  
-  .name-stack {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    line-height: 0.9;
-    width: 100%;
-  }
-  
-  .name-solid {
-    font-family: var(--font-display);
-    font-size: 12vw;
-    color: var(--text-light);
-    text-transform: uppercase;
-    letter-spacing: -2px;
-    text-shadow: 0px 15px 25px rgba(0, 0, 0, 0.6);
-  }
-  
-  /* --- DESIGNER LABEL LAYER (3D Cube Animation) --- */
-  .designer-label-container {
-    position: absolute;
-    bottom: 12vh; /* Precise vertical placement, far lower, near the CV button's plane */
-    right: 8%;    /* Horizontal alignment with the text layout grid */
-    z-index: 10;  /* Below the model, above the background, same as text */
-    font-size: clamp(2rem, 4vw, 4rem); 
-    height: 1em; 
-    width: 8em;   /* Gives the cube a defined width to rotate within */
-    perspective: 1000px; /* Gives the 3D depth effect */
-  }
-  
-  .cube {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    transform-style: preserve-3d;
-    /* 12s total duration for 4 faces = 3 seconds per face */
-    animation: cubeRotate 12s infinite cubic-bezier(0.25, 1, 0.5, 1);
-  }
-  
-  .cube-face {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end; /* Keeps the text aligned perfectly to the right */
-    font-family: var(--font-display);
-    color: var(--text-light);
-    text-transform: uppercase;
-    letter-spacing: -2px;
-    line-height: 1;
-    backface-visibility: hidden; /* Hides the text when it faces backward */
-  }
-  
-  /* Positioning the 4 faces of the cube */
-  .face-front  { transform: rotateX(0deg) translateZ(0.5em); }
-  .face-top    { transform: rotateX(90deg) translateZ(0.5em); }
-  .face-back   { transform: rotateX(180deg) translateZ(0.5em); }
-  .face-bottom { transform: rotateX(-90deg) translateZ(0.5em); }
-  
-  /* The Keyframe Animation */
-  @keyframes cubeRotate {
-    0%, 15% { transform: rotateX(0deg); }
-    25%, 40% { transform: rotateX(90deg); }
-    50%, 65% { transform: rotateX(180deg); }
-    75%, 90% { transform: rotateX(270deg); }
-    100% { transform: rotateX(360deg); }
-  }
-  
-  /* --- 3D MODEL LAYER --- */
-  .model-container {
-    position: absolute;
-    bottom: -5%; /* Pulls the image slightly down to crop the bottom if needed */
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 20; /* Sits ON TOP of the text */
-    height: 85vh; /* Adjust this so the model fits perfectly on your screen */
-    display: flex;
-    justify-content: center;
-    pointer-events: none; /* Prevents the image from blocking clicks on elements behind it */
-  }
-  
-  .model-img {
-    height: 100%;
-    width: auto;
-    object-fit: contain;
-    /* Optional drop shadow to separate model from text */
-    filter: drop-shadow(0px 20px 30px rgba(0, 0, 0, 0.5)); 
-  }
-  
-  /* --- BUTTON LAYER --- */
-  .download-btn {
-    position: absolute;
-    /* Match these two lines to the designer-label-container */
-    bottom: 12vh; 
-    left: 8%;     
+    bottom: 12vh;
+    left: 8%;
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    background-color: rgba(198, 206, 240, 0.95);
-    color: var(--bg-black);
+    /* Updated to dark background with light text */
+    background-color: var(--brand-dark-blue); 
+    color: var(--text-light); 
     padding: 1rem 1.5rem;
     border: none;
     border-radius: 8px;
@@ -144,18 +144,25 @@
     cursor: pointer;
     transition: all 0.3s ease;
     z-index: 30;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
   }
   
-  @media (max-width: 768px) {
-    .designer-label-container {
-      bottom: 8vh;
-      right: 5%;
-    }
-    .download-btn {
-      bottom: 8vh;
-      left: 5%;
-    }
-    .model-container {
-      height: 60vh;
-    }
+  .download-btn:hover {
+    /* Slight lighten on hover for interactivity */
+    background-color: #2D314A; 
+    transform: translateY(-2px);
   }
+
+@media (max-width: 768px) {
+  .designer-label-container {
+    bottom: 8vh;
+    right: 5%;
+  }
+  .download-btn {
+    bottom: 8vh;
+    left: 5%;
+  }
+  .model-container {
+    height: 60vh;
+  }
+}
