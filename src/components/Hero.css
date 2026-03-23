@@ -207,3 +207,22 @@
     bottom: 0;
   }
 }
+/* --- TABLET RESPONSIVE FIXES --- */
+@media (max-width: 1024px) {
+  .designer-label-container {
+    bottom: auto; 
+    top: 10vh; /* Places it safely above the model's head */
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    
+    /* Makes it big and prominent for tablet screens */
+    font-size: 3rem; 
+    z-index: 30; 
+  }
+  
+  /* Centers the text inside the 3D cube */
+  .cube-face {
+    justify-content: center; 
+  }
+}

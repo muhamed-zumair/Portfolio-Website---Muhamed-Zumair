@@ -1,12 +1,45 @@
-import React from 'react';
-import './Projects.css';
+import React, { useEffect, useRef, useState } from 'react';
+import './Projects.css'; // Make sure this matches your exact filename (e.g. projects.css vs Projects.css)
 
 const Projects = () => {
+  const sectionRef = useRef(null);
+  const [scrollProgress, setScrollProgress] = useState(0);
+  // Add state to detect mobile screens so it stacks normally on phones
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener('resize', handleResize);
+
+    const handleScroll = () => {
+      if (!sectionRef.current || isMobile) return; 
+      
+      const { top, height } = sectionRef.current.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      const scrollDistance = -top; 
+      const scrollableHeight = height - windowHeight;
+      
+      let progress = scrollableHeight > 0 ? scrollDistance / scrollableHeight : 0;
+      progress = Math.max(0, Math.min(progress, 1));
+      
+      setScrollProgress(progress * 100);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); 
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleResize);
+    }
+  }, [isMobile]);
+
   const projectList = [
     {
       title: "EventLK",
-      description: "A smart, AI-powered event planning and management platform designed specifically to streamline operations for university clubs and societies. Developed using Agile methodology, it features AI-driven budget and venue recommendations, QR-based registration, and centralized tools for task tracking and financial management to drastically improve efficiency and user experience. (eventlk.com)",
-      tags: ["Next.js", "Node.js", "PostgreSQL", "Python", "Random Forest","TailWind CSS."]
+      description: "A smart, AI-powered event planning and management platform designed specifically to streamline operations for university clubs and societies. Developed using Agile methodology, it features AI-driven budget and venue recommendations, QR-based registration, and centralized tools for task tracking and financial management to drastically improve efficiency and user experience.",
+      tags: ["Next.js", "Node.js", "PostgreSQL", "Python", "Random Forest","TailWind CSS."],
+      link: "https://www.eventlk.com"
     },
     {
       title: "Estate Agent Web App",
@@ -31,25 +64,36 @@ const Projects = () => {
   ];
 
   return (
-    <section className="projects-section" id="portfolio">
-      <div className="projects-container">
+    // Uses the "projects-scroll-section" class to match your CSS file
+    <section className="projects-scroll-section" ref={sectionRef} id="portfolio">
+      <div className="sticky-wrapper">
         <h1 className="projects-heading">PROJECTS</h1>
         
-        <div className="projects-grid">
-          {projectList.map((project, index) => (
-            <div className="project-card" key={index}>
-              <h3 className="project-title">{project.title}</h3>
-              <p className="project-desc">{project.description}</p>
-              
-              <div className="tech-stack">
-                {project.tags.map((tag, tagIndex) => (
-                  <span className="tech-pill" key={tagIndex}>
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </div>
-          ))}
+        <div 
+          className="projects-track"
+          // This moves the track horizontally based on scroll progress
+          style={isMobile ? {} : { transform: `translateX(calc(-${scrollProgress}% + ${scrollProgress}vw))` }}
+        >
+          {projectList.map((project, index) => {
+            const CardTag = project.link ? 'a' : 'div';
+            const linkAttributes = project.link ? { href: project.link, target: "_blank", rel: "noopener noreferrer" } : {};
+
+            return (
+              <CardTag 
+                className={`project-card ${project.link ? 'is-clickable' : ''}`} 
+                key={index} 
+                {...linkAttributes}
+              >
+                <h3 className="project-title">{project.title}</h3>
+                <p className="project-desc">{project.description}</p>
+                <div className="tech-stack">
+                  {project.tags.map((tag, tagIndex) => (
+                    <span className="tech-pill" key={tagIndex}>{tag}</span>
+                  ))}
+                </div>
+              </CardTag>
+            );
+          })}
         </div>
       </div>
     </section>

@@ -100,30 +100,52 @@
 }
 
 /* Make it responsive for smaller screens */
+/* --- MOBILE RESPONSIVE FIXES --- */
 @media (max-width: 768px) {
-    /* Disable 400vh height and sticky layout */
+    /* Disable the massive height and sticky layout */
     .projects-scroll-section {
       height: auto !important;
-      padding: 4rem 1rem;
+      padding: 5rem 1rem;
     }
+    
     .sticky-wrapper {
       position: relative;
       height: auto;
       display: block;
+      overflow: visible; /* Prevents cards from getting cut off */
     }
+    
     .projects-heading {
       text-align: center;
       margin-left: 0;
-      font-size: 3rem;
+      font-size: 3.5rem;
+      margin-bottom: 3rem;
     }
+    
+    /* Force the track to stack vertically and override inline styles */
     .projects-track {
-      flex-direction: column; /* Stack vertically */
-      width: 100%;
-      padding: 0;
+      display: flex;
+      flex-direction: column; 
+      width: 100% !important;
+      padding: 0; 
       gap: 2rem;
+      transform: none !important; /* Prevents React from dragging it sideways on phones */
     }
+    
+    /* Force cards to fit the screen */
     .project-card {
-      width: 100%; /* Take up full mobile width */
+      width: 100% !important; 
+      max-width: 100%;
       min-height: auto;
+      padding: 2rem 1.5rem; /* Slightly smaller padding for phone screens */
+      flex-shrink: 1;
+    }
+    
+    .project-title {
+      font-size: 1.3rem;
+    }
+    
+    .project-desc {
+      font-size: 0.95rem;
     }
   }
