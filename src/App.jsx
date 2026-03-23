@@ -1,25 +1,23 @@
 import React from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import About from './components/About'; // New Import
+import About from './components/About';
+import Projects from './components/Projects'; // <--- Add this import
 import './App.css';
 
 function App() {
   return (
     <div className="app-container">
-      {/* Background Columns */}
       <div className="background-grid">
         <div className="col-black"></div>
         <div className="col-blue"></div>
         <div className="col-black"></div>
       </div>
 
-      {/* Components */}
       <Navbar />
       <Hero />
-      
-      {/* The new About section is added here */}
       <About />
+      <Projects /> {/* <--- Add the component here */}
     </div>
   );
 }
