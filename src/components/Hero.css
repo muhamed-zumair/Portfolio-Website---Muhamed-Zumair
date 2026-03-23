@@ -152,16 +152,58 @@
     transform: translateY(-2px);
   }
 
+/* Find the existing @media (max-width: 768px) at the bottom and REPLACE it with this: */
 @media (max-width: 768px) {
+  .hero-text-container {
+    padding: 0 1rem;
+    margin-top: 2rem; 
+  }
+  
+  .greeting {
+    font-size: 2rem;
+    margin-left: 0;
+    align-self: center;
+  }
+  
+  .name-solid {
+    font-size: 16vw; 
+  }
+  
+  /* --- THE UPDATED CUBE ANIMATION SECTION --- */
   .designer-label-container {
-    bottom: 8vh;
-    right: 5%;
+    bottom: auto; 
+    /* 18vh places it perfectly between the navbar and the model's head */
+    top: 18vh; 
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    
+    /* Made it significantly bigger! (Increased from 1.5rem to 2.2rem) */
+    font-size: 2.2rem; 
+    
+    /* Forces it to sit strictly in front of the model and text */
+    z-index: 30; 
   }
+  
+  /* Centers the text inside the 3D cube so it doesn't lean to the right */
+  .cube-face {
+    justify-content: center; 
+  }
+  /* ------------------------------------------- */
+
   .download-btn {
-    bottom: 8vh;
-    left: 5%;
+    bottom: 5vh; 
+    left: 50%; 
+    transform: translateX(-50%);
+    width: max-content;
   }
+  
+  .download-btn:hover {
+    transform: translateX(-50%) translateY(-2px); 
+  }
+  
   .model-container {
-    height: 60vh;
+    height: 65vh;
+    bottom: 0;
   }
 }

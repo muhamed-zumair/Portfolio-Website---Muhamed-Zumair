@@ -165,21 +165,53 @@
     }
   }
   
-  @media (max-width: 768px) {
-    /* On mobile, stack the timeline vertically so it doesn't squish */
-    .timeline-container {
-      flex-direction: column;
-      align-items: center;
-      gap: 3rem;
-    }
-    .timeline-container::after {
-      /* Switch back to vertical line for mobile */
-      width: 2px;
-      height: auto;
-      top: 30px;
-      bottom: 30px;
-      left: 50%;
-      right: auto;
-      transform: translateX(-50%);
-    }
+/* Find the existing media queries at the bottom of About.css and replace them with this: */
+@media (max-width: 1024px) {
+  .about-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
   }
+  .about-image-column {
+    width: 100%;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+  .about-text-column {
+    padding: 0 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .about-section { padding: 4rem 1rem; }
+  .about-heading { font-size: 3rem; text-align: center; }
+  .about-description { text-align: justify; font-size: 1rem; }
+  
+  .timeline-container {
+    flex-direction: column; /* Stack vertically */
+    align-items: flex-start;
+    gap: 3rem;
+    margin-top: 3rem;
+    padding-left: 1rem;
+  }
+  
+  .timeline-item {
+    flex-direction: row; /* Icon next to text */
+    text-align: left;
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
+  
+  .icon-circle { margin-bottom: 0; }
+  .timeline-content { align-items: flex-start; }
+  
+  /* Switch to Vertical Line connecting timeline steps */
+  .timeline-container::after {
+    width: 2px;
+    height: auto;
+    top: 30px;
+    bottom: 30px;
+    left: calc(1rem + 30px); /* 1rem padding + half of 60px icon */
+    right: auto;
+  }
+}

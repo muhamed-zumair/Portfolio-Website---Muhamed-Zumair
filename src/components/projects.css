@@ -1,82 +1,129 @@
-.projects-section {
-    background-color: var(--bg-black);
-    color: var(--text-light);
-    padding: 8rem 2rem;
-    width: 100vw;
-    position: relative;
-    z-index: 20;
-  }
+.projects-scroll-section {
+  /* This makes the section 4 times the height of the screen, 
+     meaning the user scrolls down for a while to move horizontally */
+  height: 400vh; 
+  background-color: var(--bg-black);
+  position: relative;
+  z-index: 20;
+}
+
+.sticky-wrapper {
+  position: sticky;
+  top: 0;
+  height: 100vh; /* Takes up exactly one screen height */
+  width: 100vw;
+  overflow: hidden; /* Hides the horizontal scrollbar */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centers everything vertically */
+}
+
+.projects-heading {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 5vw, 5rem);
+  color: var(--text-light);
+  text-transform: uppercase;
+  margin-left: 5vw; /* Align with the start of the cards */
+  margin-bottom: 2rem;
+  line-height: 1;
+}
+
+.projects-track {
+  display: flex;
+  gap: 3rem;
+  padding: 0 5vw; /* Adds space to the left and right edges */
+  width: max-content; /* Lets the track be as wide as it needs to be */
+  will-change: transform; /* Optimizes the animation for smoother framerates */
+}
+
+.project-card {
+  background-color: var(--brand-dark-blue);
+  padding: 2.5rem;
+  border-radius: 16px;
+  border: 2px solid transparent;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
   
-  .projects-container {
-    max-width: 1300px;
-    margin: 0 auto;
-  }
+  /* Critical for Horizontal scrolling: */
+  width: 450px; /* Fixed width so cards don't squish */
+  min-height: 400px;
+  flex-shrink: 0; /* Prevents flexbox from shrinking the cards */
   
-  .projects-heading {
-    font-family: var(--font-display);
-    font-size: clamp(3rem, 5vw, 5rem);
-    color: var(--text-light);
-    text-transform: uppercase;
-    margin-bottom: 4rem;
-    text-align: center;
-    line-height: 1;
-  }
-  
-  .projects-grid {
-    display: grid;
-    /* Automatically adjusts how many cards fit in a row based on screen size */
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 2rem;
-  }
-  
-  .project-card {
-    background-color: var(--brand-dark-blue);
-    padding: 2.5rem;
-    border-radius: 16px;
-    border: 2px solid transparent;
-    display: flex;
-    flex-direction: column;
-    transition: all 0.3s ease;
-    cursor: default;
-  }
-  
-  .project-card:hover {
-    border-color: var(--brand-light-blue);
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-  }
-  
-  .project-title {
-    font-family: var(--font-display);
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-    color: var(--brand-light-blue);
-    letter-spacing: -1px;
-  }
-  
-  .project-desc {
-    font-family: var(--font-main);
-    font-size: 1rem;
-    line-height: 1.7;
-    color: rgba(229, 225, 216, 0.85);
-    margin-bottom: 2rem;
-    flex-grow: 1; /* Pushes the tech tags to the bottom of the card */
-  }
-  
-  .tech-stack {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.6rem;
-  }
-  
-  .tech-pill {
-    font-family: var(--font-main);
-    font-size: 0.75rem;
-    font-weight: 700;
-    padding: 0.5rem 1rem;
-    background-color: var(--bg-black);
-    color: var(--text-light);
-    border-radius: 20px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.project-card.is-clickable {
+  cursor: pointer;
+}
+
+.project-card:hover {
+  border-color: var(--brand-light-blue);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.project-title {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--brand-light-blue);
+  letter-spacing: -1px;
+}
+
+.project-desc {
+  font-family: var(--font-main);
+  font-size: 1rem;
+  line-height: 1.7;
+  color: rgba(229, 225, 216, 0.85);
+  margin-bottom: 2rem;
+  flex-grow: 1;
+}
+
+.tech-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.tech-pill {
+  font-family: var(--font-main);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.5rem 1rem;
+  background-color: var(--bg-black);
+  color: var(--text-light);
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Make it responsive for smaller screens */
+@media (max-width: 768px) {
+    /* Disable 400vh height and sticky layout */
+    .projects-scroll-section {
+      height: auto !important;
+      padding: 4rem 1rem;
+    }
+    .sticky-wrapper {
+      position: relative;
+      height: auto;
+      display: block;
+    }
+    .projects-heading {
+      text-align: center;
+      margin-left: 0;
+      font-size: 3rem;
+    }
+    .projects-track {
+      flex-direction: column; /* Stack vertically */
+      width: 100%;
+      padding: 0;
+      gap: 2rem;
+    }
+    .project-card {
+      width: 100%; /* Take up full mobile width */
+      min-height: auto;
+    }
   }

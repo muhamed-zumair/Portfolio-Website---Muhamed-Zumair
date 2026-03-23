@@ -2,6 +2,7 @@ import React from 'react';
 import { Download } from 'lucide-react';
 import './Hero.css';
 
+
 const Hero = () => {
   return (
     <main className="hero-section">

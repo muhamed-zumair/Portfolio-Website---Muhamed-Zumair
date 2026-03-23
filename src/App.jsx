@@ -2,7 +2,8 @@ import React from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
-import Projects from './components/Projects'; // <--- Add this import
+import Projects from './components/Projects';
+import Contact from './components/Contact'; // <-- Add this import
 import './App.css';
 
 function App() {
@@ -17,7 +18,8 @@ function App() {
       <Navbar />
       <Hero />
       <About />
-      <Projects /> {/* <--- Add the component here */}
+      <Projects />
+      <Contact /> {/* <-- Add the component here */}
     </div>
   );
 }

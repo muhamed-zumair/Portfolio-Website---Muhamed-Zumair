@@ -6,7 +6,7 @@ const Projects = () => {
     {
       title: "EventLK",
       description: "A smart, AI-powered event planning and management platform designed specifically to streamline operations for university clubs and societies. Developed using Agile methodology, it features AI-driven budget and venue recommendations, QR-based registration, and centralized tools for task tracking and financial management to drastically improve efficiency and user experience. (eventlk.com)",
-      tags: ["PNext.js", "Node.js", "PostgreSQL", "Python", "Random Forest","TailWind CSS."]
+      tags: ["Next.js", "Node.js", "PostgreSQL", "Python", "Random Forest","TailWind CSS."]
     },
     {
       title: "Estate Agent Web App",
