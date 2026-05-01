@@ -14,7 +14,6 @@ const Hero = () => {
             <h1 className="name-solid">MUHAMED</h1>
             <h1 className="name-solid">ZUMAIR</h1>
           </div>
-          {/* THE DESIGNER LABEL CONTAINER HAS BEEN REMOVED FROM HERE */}
         </div>
       </div>
 
@@ -33,11 +32,15 @@ const Hero = () => {
         <img src="/model.png" alt="3D Character" className="model-img" />
       </div>
 
-      {/* 4. The Button Layer (In front of everything) */}
-      <button className="download-btn">
+      {/* 4. The Button Layer (Now an anchor tag for downloading) */}
+      <a 
+        href="/Muhamed_Zumair_CV.pdf" 
+        download="Muhamed_Zumair_CV.pdf" 
+        className="download-btn"
+      >
         <Download size={20} strokeWidth={2.5} />
         Download CV
-      </button>
+      </a>
 
     </main>
   );
