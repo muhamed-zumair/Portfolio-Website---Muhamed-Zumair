@@ -1,10 +1,25 @@
 .hero-section {
-  position: relative;
-  min-height: 100vh;
+  position: sticky;
+  top: 0;
+  height: 100vh; /* Changed from min-height to a strict height */
+  height: 100dvh; /* Uses Dynamic Viewport Height to fix mobile browser bar clipping */
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden; 
+  z-index: 1; /* Keeps the hero behind the next sections */
+}
+
+/* --- PARTICLE CANVAS LAYER --- */
+.particles-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1; 
+  pointer-events: none; 
 }
 
 /* --- TYPOGRAPHY LAYER --- */
@@ -15,7 +30,7 @@
   transform: translate(-50%, -50%);
   width: 100%;
   max-width: 1500px;
-  z-index: 10; /* Sits above the background, below the model */
+  z-index: 10; 
   padding: 0 2rem;
 }
 
@@ -55,13 +70,13 @@
 /* --- DESIGNER LABEL LAYER (3D Cube Animation) --- */
 .designer-label-container {
   position: absolute;
-  bottom: 12vh; /* Precise vertical placement, far lower, near the CV button's plane */
-  right: 8%;    /* Horizontal alignment with the text layout grid */
-  z-index: 10;  /* Below the model, above the background, same as text */
+  bottom: 12vh; 
+  right: 8%;    
+  z-index: 10;  
   font-size: clamp(2rem, 4vw, 4rem); 
   height: 1em; 
-  width: 8em;   /* Gives the cube a defined width to rotate within */
-  perspective: 1000px; /* Gives the 3D depth effect */
+  width: 8em;   
+  perspective: 1000px; 
 }
 
 .cube {
@@ -69,7 +84,6 @@
   width: 100%;
   height: 100%;
   transform-style: preserve-3d;
-  /* 12s total duration for 4 faces = 3 seconds per face */
   animation: cubeRotate 12s infinite cubic-bezier(0.25, 1, 0.5, 1);
 }
 
@@ -79,22 +93,20 @@
   height: 100%;
   display: flex;
   align-items: center;
-  justify-content: flex-end; /* Keeps the text aligned perfectly to the right */
+  justify-content: flex-end; 
   font-family: var(--font-display);
   color: var(--text-light);
   text-transform: uppercase;
   letter-spacing: -2px;
   line-height: 1;
-  backface-visibility: hidden; /* Hides the text when it faces backward */
+  backface-visibility: hidden; 
 }
 
-/* Positioning the 4 faces of the cube */
 .face-front  { transform: rotateX(0deg) translateZ(0.5em); }
 .face-top    { transform: rotateX(90deg) translateZ(0.5em); }
 .face-back   { transform: rotateX(180deg) translateZ(0.5em); }
 .face-bottom { transform: rotateX(-90deg) translateZ(0.5em); }
 
-/* The Keyframe Animation */
 @keyframes cubeRotate {
   0%, 15% { transform: rotateX(0deg); }
   25%, 40% { transform: rotateX(90deg); }
@@ -106,123 +118,153 @@
 /* --- 3D MODEL LAYER --- */
 .model-container {
   position: absolute;
-  bottom: -5%; /* Pulls the image slightly down to crop the bottom if needed */
+  bottom: -5%; 
   left: 50%;
   transform: translateX(-50%);
-  z-index: 20; /* Sits ON TOP of the text */
-  height: 85vh; /* Adjust this so the model fits perfectly on your screen */
+  z-index: 20; 
+  height: 85vh; 
   display: flex;
   justify-content: center;
-  pointer-events: none; /* Prevents the image from blocking clicks on elements behind it */
+  pointer-events: none; 
 }
 
 .model-img {
   height: 100%;
   width: auto;
   object-fit: contain;
-  /* Optional drop shadow to separate model from text */
   filter: drop-shadow(0px 20px 30px rgba(0, 0, 0, 0.5)); 
 }
 
+/* --- BUTTON LAYER --- */
 .download-btn {
-    position: absolute;
-    bottom: 12vh;
-    left: 8%;
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    /* Updated to dark background with light text */
-    background-color: var(--brand-dark-blue); 
-    color: var(--text-light); 
-    padding: 1rem 1.5rem;
-    border: none;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: 700;
-    font-family: var(--font-main);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    z-index: 30;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-  }
-  
-  .download-btn:hover {
-    /* Slight lighten on hover for interactivity */
-    background-color: #2D314A; 
-    transform: translateY(-2px);
-  }
+  position: absolute;
+  bottom: 12vh;
+  left: 8%;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background-color: var(--brand-dark-blue); 
+  color: var(--text-light); 
+  padding: 1rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: var(--font-main);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 30;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); 
+  text-decoration: none; 
+}
 
-/* Find the existing @media (max-width: 768px) at the bottom and REPLACE it with this: */
-@media (max-width: 768px) {
-  .hero-text-container {
-    padding: 0 1rem;
-    margin-top: 2rem; 
-  }
-  
-  .greeting {
-    font-size: 2rem;
-    margin-left: 0;
-    align-self: center;
-  }
-  
-  .name-solid {
-    font-size: 16vw; 
-  }
-  
-  /* --- THE UPDATED CUBE ANIMATION SECTION --- */
+.download-btn:hover {
+  background-color: #2D314A; 
+  transform: translateY(-2px);
+}
+
+/* --- SOCIAL MEDIA PANEL LAYER --- */
+.social-panel {
+  position: absolute;
+  right: 4%;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  z-index: 30; /* Stays above particles and model */
+}
+
+.social-icon {
+  color: var(--text-light);
+  opacity: 0.6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.social-icon:hover {
+  opacity: 1;
+  color: #ff3333; /* Turns red to match the particles on hover */
+  transform: translateX(-4px) scale(1.1); /* Slight pop-out effect to the left */
+}
+
+/* --- TABLET RESPONSIVE FIXES --- */
+@media (max-width: 1024px) {
   .designer-label-container {
     bottom: auto; 
-    /* 18vh places it perfectly between the navbar and the model's head */
-    top: 18vh; 
+    top: 10vh; 
     left: 50%;
     right: auto;
     transform: translateX(-50%);
-    
-    /* Made it significantly bigger! (Increased from 1.5rem to 2.2rem) */
-    font-size: 2.2rem; 
-    
-    /* Forces it to sit strictly in front of the model and text */
+    font-size: 3rem; 
     z-index: 30; 
   }
   
-  /* Centers the text inside the 3D cube so it doesn't lean to the right */
   .cube-face {
     justify-content: center; 
   }
-  /* ------------------------------------------- */
+}
 
+/* --- MOBILE RESPONSIVE FIXES --- */
+@media (max-width: 768px) {
+  .hero-text-container {
+    padding: 0 1rem;
+    top: 38%; 
+    margin-top: 0; 
+  }
+  
+  .greeting {
+    font-size: clamp(1.5rem, 5vw, 2rem);
+    margin-left: 0;
+    align-self: center;
+    margin-bottom: 0.5rem; 
+  }
+  
+  .name-solid {
+    font-size: clamp(3rem, 14vw, 5.5rem); 
+  }
+  
+  .designer-label-container {
+    top: 15vh; 
+    font-size: 2.3rem; 
+  }
+  
   .download-btn {
-    bottom: 5vh; 
+    bottom: 9vh; /* Pushed up slightly to make room for social icons */
     left: 50%; 
     transform: translateX(-50%);
-    width: max-content;
+    width: 85%; 
+    max-width: 320px;
+    justify-content: center; 
+    
+    background-color: rgba(30, 34, 53, 0.85); 
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
   }
   
   .download-btn:hover {
     transform: translateX(-50%) translateY(-2px); 
   }
+
+  /* Morph Social Panel to Horizontal Bottom Bar on Mobile */
+  .social-panel {
+    top: auto;
+    bottom: 3vh; /* Places it directly under the download button */
+    right: 50%;
+    transform: translateX(50%);
+    flex-direction: row;
+    gap: 2rem;
+  }
+  
+  .social-icon:hover {
+    transform: translateY(-4px) scale(1.1); /* Pop-up effect instead of left on mobile */
+  }
   
   .model-container {
-    height: 65vh;
+    height: 55vh; 
     bottom: 0;
-  }
-}
-/* --- TABLET RESPONSIVE FIXES --- */
-@media (max-width: 1024px) {
-  .designer-label-container {
-    bottom: auto; 
-    top: 10vh; /* Places it safely above the model's head */
-    left: 50%;
-    right: auto;
-    transform: translateX(-50%);
-    
-    /* Makes it big and prominent for tablet screens */
-    font-size: 3rem; 
-    z-index: 30; 
-  }
-  
-  /* Centers the text inside the 3D cube */
-  .cube-face {
-    justify-content: center; 
   }
 }
