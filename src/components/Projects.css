@@ -1,144 +1,311 @@
-.projects-scroll-section {
-  /* This makes the section 4 times the height of the screen, 
-     meaning the user scrolls down for a while to move horizontally */
-  height: 400vh; 
-  background-color: var(--bg-black);
-  position: relative;
-  z-index: 20;
-}
-
-.sticky-wrapper {
-  position: sticky;
-  top: 0;
-  height: 100vh; /* Takes up exactly one screen height */
-  width: 100vw;
-  overflow: hidden; /* Hides the horizontal scrollbar */
-  display: flex;
-  flex-direction: column;
-  justify-content: center; /* Centers everything vertically */
-}
-
-.projects-heading {
-  font-family: var(--font-display);
-  font-size: clamp(3rem, 5vw, 5rem);
-  color: var(--text-light);
-  text-transform: uppercase;
-  margin-left: 5vw; /* Align with the start of the cards */
-  margin-bottom: 2rem;
-  line-height: 1;
-}
-
-.projects-track {
-  display: flex;
-  gap: 3rem;
-  padding: 0 5vw; /* Adds space to the left and right edges */
-  width: max-content; /* Lets the track be as wide as it needs to be */
-  will-change: transform; /* Optimizes the animation for smoother framerates */
-}
-
-.project-card {
-  background-color: var(--brand-dark-blue);
-  padding: 2.5rem;
-  border-radius: 16px;
-  border: 2px solid transparent;
-  display: flex;
-  flex-direction: column;
-  transition: all 0.3s ease;
+/* =========================================
+   SECTION 1: HORIZONTAL SCROLL PROJECTS
+   ========================================= */
+   .projects-scroll-section {
+    height: 400vh; 
+    background-color: var(--bg-black);
+    position: relative;
+    z-index: 20;
+  }
   
-  /* Critical for Horizontal scrolling: */
-  width: 450px; /* Fixed width so cards don't squish */
-  min-height: 400px;
-  flex-shrink: 0; /* Prevents flexbox from shrinking the cards */
+  .sticky-wrapper {
+    position: sticky;
+    top: 0;
+    height: 100vh; 
+    width: 100vw;
+    overflow: hidden; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+  }
   
-  text-decoration: none;
-  color: inherit;
-}
-
-.project-card.is-clickable {
-  cursor: pointer;
-}
-
-.project-card:hover {
-  border-color: var(--brand-light-blue);
-  transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-}
-
-.project-title {
-  font-family: var(--font-display);
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-  color: var(--brand-light-blue);
-  letter-spacing: -1px;
-}
-
-.project-desc {
-  font-family: var(--font-main);
-  font-size: 1rem;
-  line-height: 1.7;
-  color: rgba(229, 225, 216, 0.85);
-  margin-bottom: 2rem;
-  flex-grow: 1;
-}
-
-.tech-stack {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.6rem;
-}
-
-.tech-pill {
-  font-family: var(--font-main);
-  font-size: 0.75rem;
-  font-weight: 700;
-  padding: 0.5rem 1rem;
-  background-color: var(--bg-black);
-  color: var(--text-light);
-  border-radius: 20px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-/* Make it responsive for smaller screens */
-/* --- MOBILE RESPONSIVE FIXES --- */
-@media (max-width: 768px) {
-    /* Disable the massive height and sticky layout */
-    .projects-scroll-section {
-      height: auto !important;
-      padding: 5rem 1rem;
-    }
+  .projects-header-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2rem;
+  }
+  
+  .projects-heading {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 5vw, 5rem);
+    color: var(--text-light);
+    text-transform: uppercase;
+    margin-left: 5vw; 
+    margin-bottom: 0.2rem; 
+    line-height: 1;
+  }
+  
+  .projects-subheading {
+    font-family: var(--font-main);
+    font-size: clamp(1rem, 1.5vw, 1.5rem);
+    color: rgba(229, 225, 216, 0.6); 
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-left: 5vw; 
+    font-weight: 500;
+  }
+  
+  .projects-track {
+    display: flex;
+    gap: 3rem;
+    padding: 0 5vw; 
+    width: max-content; 
+    will-change: transform; 
+  }
+  
+  /* Updated Card to hold Image + Content */
+  .project-card {
+    background-color: var(--brand-dark-blue);
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,0.05);
+    display: flex;
+    flex-direction: column;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    width: 450px; 
+    min-height: 500px;
+    flex-shrink: 0; 
+    text-decoration: none;
+    color: inherit;
+    overflow: hidden; 
+  }
+  
+  .project-card.is-clickable {
+    cursor: pointer;
+  }
+  
+  .project-card:hover {
+    border-color: var(--brand-light-blue);
+    transform: translateY(-8px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+  }
+  
+  /* --- NEW: Image Styling --- */
+  .project-image-wrapper {
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+    border-bottom: 2px solid var(--bg-black);
+  }
+  
+  .project-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%) contrast(1.2); 
+    transition: all 0.5s ease;
+  }
+  
+  .project-card:hover .project-image-wrapper img {
+    filter: grayscale(0%) contrast(1);
+    transform: scale(1.05);
+  }
+  
+  .project-content {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+  
+  .project-title {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    margin-bottom: 0.8rem;
+    color: var(--brand-light-blue);
+    letter-spacing: -1px;
+  }
+  
+  .project-desc {
+    font-family: var(--font-main);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: rgba(229, 225, 216, 0.85);
+    margin-bottom: 2rem;
+    flex-grow: 1;
+  }
+  
+  .tech-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+  
+  .tech-pill {
+    font-family: var(--font-main);
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 0.4rem 0.8rem;
+    background-color: var(--bg-black);
+    color: var(--text-light);
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  
+  /* =========================================
+     SECTION 2: VERTICAL STACKING DESIGNS
+     ========================================= */
+  
+  .designs-stack-section {
+    background-color: var(--bg-black);
+    padding: 0 0 15rem 0; 
+    position: relative;
+    z-index: 21;
+  }
+  
+  .designs-header {
+    position: sticky;
+    top: 0;
+    padding-top: 100px; 
+    padding-bottom: 2rem; 
+    background-color: var(--bg-black); 
+    z-index: 30; 
+    margin-bottom: 2rem;
+  }
+  
+  .designs-container {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem; 
+    padding: 0 5vw;
+    max-width: 1000px; 
+    margin: 0 auto;
+  }
+  
+  .design-stack-card {
+    position: sticky;
+    background-color: #111111; 
+    border: 1px solid rgba(255, 255, 255, 0.1); 
+    border-radius: 20px;
+    display: flex;
+    flex-direction: row; 
+    align-items: stretch;
+    box-shadow: 0 -15px 40px rgba(0, 0, 0, 0.8);
+    transform-origin: top center;
+    transition: all 0.3s ease;
+    z-index: 25; 
+    overflow: hidden;
+    height: 400px;
+  }
+  
+  .design-image-wrapper {
+    width: 45%;
+    overflow: hidden;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .design-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(80%);
+    transition: all 0.5s ease;
+  }
+  
+  .design-stack-card:hover .design-image-wrapper img {
+    filter: grayscale(0%);
+    transform: scale(1.05);
+  }
+  
+  .design-content-wrapper {
+    width: 55%;
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .design-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 1.5rem;
+  }
+  
+  .design-card-header .project-title {
+    margin-bottom: 0;
+  }
+  
+  .design-type {
+    font-family: var(--font-main);
+    font-size: 0.85rem;
+    color: rgba(229, 225, 216, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
+  .design-pill {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background-color: transparent;
+  }
+  
+  /* --- Figma Button Styling --- */
+  .figma-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.2rem;
+    background-color: transparent;
+    color: var(--brand-light-blue, #fff);
+    font-family: var(--font-main);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    text-decoration: none;
+    letter-spacing: 1px;
+    border: 1px solid var(--brand-light-blue, #fff);
+    border-radius: 30px;
+    transition: all 0.3s ease;
+    white-space: nowrap; 
+  }
+  
+  .figma-btn:hover {
+    background-color: var(--brand-light-blue, #fff);
+    color: var(--bg-black, #000);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.1);
+  }
+  
+  /* --- MOBILE RESPONSIVE FIXES --- */
+  @media (max-width: 768px) {
     
     .sticky-wrapper {
-      position: relative;
-      height: auto;
-      display: block;
-      overflow: visible; /* Prevents cards from getting cut off */
+      justify-content: flex-start; 
+      padding-top: 120px; 
     }
-    
+  
+    .projects-header-group {
+      margin-bottom: 1.5rem;
+    }
+  
     .projects-heading {
-      text-align: center;
-      margin-left: 0;
-      font-size: 3.5rem;
-      margin-bottom: 3rem;
+      font-size: 3rem;
+      margin-left: 5vw;
+    }
+  
+    .projects-subheading {
+      font-size: 0.9rem;
+      margin-left: 5vw;
+      letter-spacing: 2px;
     }
     
-    /* Force the track to stack vertically and override inline styles */
     .projects-track {
-      display: flex;
-      flex-direction: column; 
-      width: 100% !important;
-      padding: 0; 
-      gap: 2rem;
-      transform: none !important; /* Prevents React from dragging it sideways on phones */
+      gap: 1.5rem;
     }
     
-    /* Force cards to fit the screen */
     .project-card {
-      width: 100% !important; 
-      max-width: 100%;
+      width: 85vw; 
+      max-width: 350px; 
       min-height: auto;
-      padding: 2rem 1.5rem; /* Slightly smaller padding for phone screens */
-      flex-shrink: 1;
+    }
+  
+    .project-image-wrapper {
+      height: 180px; 
+    }
+  
+    .project-content {
+      padding: 1.5rem;
     }
     
     .project-title {
@@ -146,6 +313,45 @@
     }
     
     .project-desc {
-      font-size: 0.95rem;
+      font-size: 0.9rem;
+    }
+  
+    .designs-header {
+      padding-top: 100px; 
+    }
+  
+    .designs-container {
+      padding: 0 1rem;
+      gap: 2rem;
+    }
+  
+    .design-stack-card {
+      flex-direction: column;
+      height: auto;
+    }
+  
+    .design-image-wrapper {
+      width: 100%;
+      height: 200px;
+      border-right: none;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+  
+    .design-content-wrapper {
+      width: 100%;
+      padding: 1.5rem;
+    }
+  
+    .design-card-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+      padding-bottom: 1rem;
+      margin-bottom: 1rem;
+    }
+    
+    .figma-btn {
+      width: 100%;
+      justify-content: center;
     }
   }
